@@ -18,8 +18,10 @@ public class AuthController {
 
         Optional<User> user = userRepository.findByUsername(loginUser.getUsername());
 
-        if (user.isPresent() && user.get().getPassword().equals(loginUser.getPassword())) {
-            return user.get(); // success
+        if (user.isPresent()) {
+            if (user.get().getPassword().equals(loginUser.getPassword())) {
+                return user.get();
+            }
         }
 
         throw new RuntimeException("Invalid credentials");
